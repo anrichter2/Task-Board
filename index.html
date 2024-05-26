@@ -22,26 +22,26 @@
   </header>
   <div class="container">
     <div class="text-center mb-5">
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
+      <button id="add-task" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
     </div>
     <!-- Todo: Create a modal with a form to add tasks -->
-    <div id="dialog-form" title="Create new user">
-  <p class="validateTips">All form fields are required.</p>
+    <div id="dialog-form" title="Add Task">
+      <p class="validateTips">All form fields are required.</p>
+
+      <form>
+        <fieldset>
+          <label for="task-title">Task Title</label>
+          <input type="text" name="task-title" id="task-title-input" class="text ui-widget-content ui-corner-all">
+          <label for="due-date">Due Date</label>
+          <input type="text" name="due-date" id="task-date-input" class="text ui-widget-content ui-corner-all">
+          <label for="description">Task Description</label>
+          <textarea type="text" name="description" id="task-description-input" class="text ui-widget-content ui-corner-all"></textarea>
  
-  <form>
-    <fieldset>
-      <label for="name">Name</label>
-      <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
-      <label for="email">Email</label>
-      <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
- 
-      <!-- Allow form submission with keyboard without duplicating the dialog button -->
-      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-    </fieldset>
-  </form>
-</div>
+          <!-- Allow form submission with keyboard without duplicating the dialog button -->
+          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+      </form>
+    </div>
 
     <div class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">

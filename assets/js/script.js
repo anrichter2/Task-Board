@@ -2,7 +2,7 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
-const taskTitle = $('#task-name-input');
+const taskTitle = $('#task-title-input');
 const taskDate = $('#task-date-input');
 const taskDescription = $('#task-description-input');
 
@@ -43,6 +43,18 @@ function createTaskCard(task) {
   bodyEl.append(buttonDelete);
   taskCard.append(titleEl);
   taskCard.append(bodyEl);
+
+  if (task.dueDate && task.status !== 'done') {
+    const today = dayjs();
+    const taskDueDate = dayjs(task.dueDate, 'DD/MM/YYYY');
+
+    if (today.isSame(taskDueDate, 'day')) {
+      taskCard.addClass('bg-warning text-white');
+    } else if (today.isAfter(taskDueDate)) {
+      taskCard.addClass('bg-danger text-white');
+      buttonDelete.addClass('border-light');
+    }
+  }
 
   return taskCard
 }
@@ -96,7 +108,7 @@ function handleAddTask(event){
   const newTask = {
     id: randomId, //might just use the generateTaskId() here instead
     title: taskTitle.val().trim(),
-    date: taskDate.val(),
+    dueDate: taskDate.val(),
     description: taskDescription.val().trim(),
     status: 'to-do'
   };
@@ -150,6 +162,21 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
+
+  $( function() {
+    $( "#task-date-input" ).datepicker({
+      changeMonth: true,
+      changeYear: true
+    });
+  
+  
+  } );
+
+  $('.lane').droppable({
+    accept: '.draggable',
+    drop: handleDrop,
+  });
+
 
 });
 
@@ -239,7 +266,7 @@ $( function() {
       addUser();
     });
  
-    $( "#create-user" ).button().on( "click", function() {
+    $( "#add-task" ).button().on( "click", function() {
       dialog.dialog( "open" );
     });
   } );
