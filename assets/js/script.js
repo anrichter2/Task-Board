@@ -170,49 +170,16 @@ $(document).ready(function () {
 
   taskFormEl.on('submit', handleAddTask);
 
-    $( "#task-date-input" ).datepicker({
-      changeMonth: true,
-      changeYear: true
-    });
+  taskDisplayEl.on('click', '.delete', handleDeleteTask);
 
+  $( "#task-date-input" ).datepicker({
+    changeMonth: true,
+    changeYear: true
+  });
+  
   $('.lane').droppable({
     accept: '.draggable',
     drop: handleDrop,
   });
-
-
-});
-
-
-taskDisplayEl.on('click', '.delete', handleDeleteTask);
-
-$( function() {
-    var dialog, form,
- 
-    dialog = $( "#dialog-form" ).dialog({
-      autoOpen: false,
-      height: 400,
-      width: 350,
-      modal: true,
-      
-      close: function() {
-        form[ 0 ].reset();
-        allFields.removeClass( "ui-state-error" );
-      }
-    });
- 
-    form = dialog.find( "form" ).on( "submit", function( event ) {
-      event.preventDefault();
-      addUser();
-    });
- 
-    $( "#add-task" ).button().on( "click", function() {
-      dialog.dialog( "open" );
-    });
-
-    $( "#submit-button" ).button().on( "click", function() {
-      dialog.dialog( "close" );
-    });
-
     
-  } );
+});

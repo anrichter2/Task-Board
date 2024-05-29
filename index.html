@@ -24,27 +24,43 @@
     <div class="text-center mb-5">
       <button id="add-task" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
     </div>
-    <!-- Todo: Create a modal with a form to add tasks -->
-    <div id="dialog-form" title="Add Task">
-      <p class="validateTips">All form fields are required.</p>
-
-      <form id="input-form">
-        <fieldset>
-          <label for="task-title">Task Title</label>
-          <input type="text" name="task-title" id="task-title-input" class="text ui-widget-content ui-corner-all">
-          <label for="due-date">Due Date</label>
-          <input type="text" name="due-date" id="task-date-input" class="text ui-widget-content ui-corner-all">
-          <label for="description">Task Description</label>
-          <textarea type="text" name="description" id="task-description-input" class="text ui-widget-content ui-corner-all"></textarea>
-          
- 
-          <!-- Allow form submission with keyboard without duplicating the dialog button -->
-          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-        </fieldset>
-        <button id="submit-button" class="btn btn-success">Add Task</button>
-      </form>
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form id="input-form">
+                <fieldset>
+                  <div class="container-fluid">
+                    <div class ="row">
+                      <div class="col-md-6">
+                        <label for="task-title">Task Title</label>
+                        <input class="col-12" type="text" name="task-title" id="task-title-input">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="due-date">Due Date</label>
+                        <input class="col-12" type="text" name="due-date" id="task-date-input">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">                 
+                        <label for="description">Task Description</label>
+                        <textarea class="col-12" type="text" name="description" id="task-description-input"></textarea>
+                      </div>
+                    </div> 
+                  </div>
+                </fieldset>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" form="input-form" class="btn btn-success" id="submit-button" data-bs-dismiss="modal">Add Task</button>
+          </div>
+        </div>
+      </div>
     </div>
-
     <div id="task-display" class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
