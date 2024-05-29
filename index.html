@@ -28,7 +28,7 @@
     <div id="dialog-form" title="Add Task">
       <p class="validateTips">All form fields are required.</p>
 
-      <form>
+      <form id="input-form">
         <fieldset>
           <label for="task-title">Task Title</label>
           <input type="text" name="task-title" id="task-title-input" class="text ui-widget-content ui-corner-all">
@@ -36,14 +36,16 @@
           <input type="text" name="due-date" id="task-date-input" class="text ui-widget-content ui-corner-all">
           <label for="description">Task Description</label>
           <textarea type="text" name="description" id="task-description-input" class="text ui-widget-content ui-corner-all"></textarea>
+          
  
           <!-- Allow form submission with keyboard without duplicating the dialog button -->
           <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
         </fieldset>
+        <button id="Submit-button">Add Task</button>
       </form>
     </div>
 
-    <div class="row swim-lanes text-center justify-content-between">
+    <div id="task-display" class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
           <div class="card-header bg-white">

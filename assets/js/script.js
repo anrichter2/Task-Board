@@ -2,6 +2,9 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
+const taskFormEl = $('#input-form')
+const submitButtonEl = $('#submit-button')
+const taskDisplayEl = $('#task-display')
 const taskTitle = $('#task-title-input');
 const taskDate = $('#task-date-input');
 const taskDescription = $('#task-description-input');
@@ -15,7 +18,7 @@ function generateTaskId() {
 // Todo: create a function to create a task card
 function createTaskCard(task) {
   const taskCard = $('<div>');
-  taskCard.addClass('card task-card');
+  taskCard.addClass('card task-card draggable');
   taskCard.attr('data-task-id', task.id);
 
   const bodyEl = $('<div>');
@@ -31,7 +34,7 @@ function createTaskCard(task) {
 
   const dateEl = $('<p>');
   dateEl.addClass('card-text');
-  dateEl.text(task.date);
+  dateEl.text(task.dueDate);
 
   const buttonDelete = $('<button>');
   buttonDelete.addClass('btn btn-danger delete');
@@ -96,7 +99,7 @@ function renderTaskList() {
       });
     },
   });
-
+  
 }
 
 // Todo: create a function to handle adding a new task
@@ -128,6 +131,7 @@ function handleAddTask(event){
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
+  event.preventDefault();
   const taskId = $(this).attr('data-task-id');
   const tasks = JSON.parse(localStorage.getItem('tasks'));
 
@@ -156,21 +160,24 @@ function handleDrop(event, ui) {
   };
 
   localStorage.setItem('tasks', JSON.stringify(tasks));
-  renderTaskList()
+  renderTaskList();
 
 }
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
 
-  $( function() {
+  renderTaskList();
+
+  taskFormEl.on('submit', handleAddTask);
+
     $( "#task-date-input" ).datepicker({
       changeMonth: true,
       changeYear: true
     });
   
   
-  } );
+   
 
   $('.lane').droppable({
     accept: '.draggable',
@@ -179,6 +186,9 @@ $(document).ready(function () {
 
 
 });
+
+
+taskDisplayEl.on('click', '.delete', handleDeleteTask);
 
 $( function() {
     var dialog, form,
@@ -250,7 +260,7 @@ $( function() {
       width: 350,
       modal: true,
       buttons: {
-        "Create an account": addUser,
+        "Add task": addUser,
         Cancel: function() {
           dialog.dialog( "close" );
         }
