@@ -11,7 +11,7 @@ const taskDescription = $('#task-description-input');
 
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
-  const randomId = crypto.randomUUID()
+  const randomId = crypto.randomUUID();
   return randomId
 }
 
@@ -64,7 +64,7 @@ function createTaskCard(task) {
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
-  const tasks = taskList
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
 
   const toDoList = $('#todo-cards');
   toDoList.empty();
@@ -106,7 +106,7 @@ function renderTaskList() {
 function handleAddTask(event){
   event.preventDefault();
 
-  let randomId = generateTaskId()
+  let randomId = generateTaskId();
 
   const newTask = {
     id: randomId, //might just use the generateTaskId() here instead
@@ -134,10 +134,9 @@ function handleDeleteTask(event){
   event.preventDefault();
   const taskId = $(this).attr('data-task-id');
   const tasks = JSON.parse(localStorage.getItem('tasks'));
-
   for (i = 0; i < tasks.length; i++) {
     if (tasks[i].id === taskId) {
-      tasks.splice(tasks[i],1);
+      tasks.splice(i,1);
     };
   };
 
@@ -175,9 +174,6 @@ $(document).ready(function () {
       changeMonth: true,
       changeYear: true
     });
-  
-  
-   
 
   $('.lane').droppable({
     accept: '.draggable',
@@ -193,78 +189,12 @@ taskDisplayEl.on('click', '.delete', handleDeleteTask);
 $( function() {
     var dialog, form,
  
-      // From https://html.spec.whatwg.org/multipage/input.html#e-mail-state-%28type=email%29
-      emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-      name = $( "#name" ),
-      email = $( "#email" ),
-      password = $( "#password" ),
-      allFields = $( [] ).add( name ).add( email ).add( password ),
-      tips = $( ".validateTips" );
- 
-    function updateTips( t ) {
-      tips
-        .text( t )
-        .addClass( "ui-state-highlight" );
-      setTimeout(function() {
-        tips.removeClass( "ui-state-highlight", 1500 );
-      }, 500 );
-    }
- 
-    function checkLength( o, n, min, max ) {
-      if ( o.val().length > max || o.val().length < min ) {
-        o.addClass( "ui-state-error" );
-        updateTips( "Length of " + n + " must be between " +
-          min + " and " + max + "." );
-        return false;
-      } else {
-        return true;
-      }
-    }
- 
-    function checkRegexp( o, regexp, n ) {
-      if ( !( regexp.test( o.val() ) ) ) {
-        o.addClass( "ui-state-error" );
-        updateTips( n );
-        return false;
-      } else {
-        return true;
-      }
-    }
- 
-    function addUser() {
-      var valid = true;
-      allFields.removeClass( "ui-state-error" );
- 
-      valid = valid && checkLength( name, "username", 3, 16 );
-      valid = valid && checkLength( email, "email", 6, 80 );
-      valid = valid && checkLength( password, "password", 5, 16 );
- 
-      valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
-      valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
-      valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
- 
-      if ( valid ) {
-        $( "#users tbody" ).append( "<tr>" +
-          "<td>" + name.val() + "</td>" +
-          "<td>" + email.val() + "</td>" +
-          "<td>" + password.val() + "</td>" +
-        "</tr>" );
-        dialog.dialog( "close" );
-      }
-      return valid;
-    }
- 
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
       height: 400,
       width: 350,
       modal: true,
-      buttons: {
-        "Add task": addUser,
-        Cancel: function() {
-          dialog.dialog( "close" );
-        }
-      },
+      
       close: function() {
         form[ 0 ].reset();
         allFields.removeClass( "ui-state-error" );
@@ -279,4 +209,10 @@ $( function() {
     $( "#add-task" ).button().on( "click", function() {
       dialog.dialog( "open" );
     });
+
+    $( "#submit-button" ).button().on( "click", function() {
+      dialog.dialog( "close" );
+    });
+
+    
   } );
