@@ -4,7 +4,6 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 // References to DOM elements used for event listeners and retrieving task data
 const taskFormEl = $('#input-form');
-const submitButtonEl = $('#submit-button');
 const taskDisplayEl = $('#task-display');
 const taskTitle = $('#task-title-input');
 const taskDate = $('#task-date-input');
@@ -67,7 +66,11 @@ function createTaskCard(task) {
 
 // Function to render the task list and make cards draggable
 function renderTaskList() {
-  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  let tasks = JSON.parse(localStorage.getItem("tasks"));
+
+  if (tasks === null) {
+    tasks = [];
+  };
 
   // Using .empty method to remove all task cards from each lane
   const toDoList = $('#todo-cards');
