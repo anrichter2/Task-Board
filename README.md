@@ -12,16 +12,16 @@ N/A
 
 Below are screenshots showing my task board website.
 
-![top half of my work portfolio](assets/images/my-portfolio-1.png)
+![Task board with multiple tasks](assets/images/task-board-webpage.png)
 
-![bottom half of my work portfolio](assets/images/my-portfolio-2.png)
+![Task board with modal open](asset/images/task-board-modal-open.png)
 
 Link to the deployed webpage
 [My Task Board](https://anrichter2.github.io/Task-Board/)
 
 ## Credits
 
-N/A
+This project is very similar to an in class mini project so there might be some code overlap.
 
 ## License
 
