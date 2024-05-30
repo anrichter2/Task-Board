@@ -14,7 +14,7 @@ Below are screenshots showing my task board website.
 
 ![Task board with multiple tasks](assets/images/task-board-webpage.png)
 
-![Task board with modal open](asset/images/task-board-modal-open.png)
+![Task board with modal open](assets/images/task-board-modal-open.png)
 
 Link to the deployed webpage
 [My Task Board](https://anrichter2.github.io/Task-Board/)
